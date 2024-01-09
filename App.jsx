@@ -1,0 +1,51 @@
+import { useState } from "react"
+
+
+function App() {
+  const[todo,settodo] = useState([{
+    id : 1,
+    Title : "goto gym",
+    Description : "10-11"
+  },{
+    id : 2,
+    Title : "goto code",
+    Description : "11-12"
+  },
+{ id : 3,
+  Title : "goto play",
+  Description : "12-13"}])
+  
+  function addtodo() {
+    settodo([
+      ...todo,
+      {
+        id: 4,
+        Title: Math.random().toString(),
+        Description: Math.random().toString()
+      }
+    ]);
+  }
+  return (
+    <div>
+    <button onClick={addtodo}>Add todo</button>
+    {todo.map(todos =>
+      <Todo Title = {todos.Title} Description = {todos.Description}></Todo>
+      
+     )}
+    </div>
+  )
+}
+
+
+function Todo(props){
+  return(
+    <>
+    <h1>{props.Title}</h1>
+    <h3>{props.Description}</h3>
+    </>
+  )
+}
+
+
+
+export default App

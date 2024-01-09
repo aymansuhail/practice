@@ -1,0 +1,52 @@
+import { useEffect, useState } from "react"
+import axios from 'axios';
+
+
+function App() {
+const[btn,setbtn] = useState(1)
+
+function change(){
+
+}
+  return (
+    <>
+    <button onClick={function(){
+      setbtn(1)}}>1</button>
+    <button onClick={function(){
+      setbtn(2)}}>2</button>
+    <button onClick={function(){
+      setbtn(3)}}>3</button>
+    <button onClick={function(){
+      setbtn(4)}}>4</button>
+    
+    <Todolist id = {btn} ></Todolist>
+    </>
+  )
+}
+
+function Todolist({ id }) {
+  console.log(id);
+  const [todo, settodo] = useState({});
+  
+  useEffect(() => {
+    axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(response => {
+        settodo(response.data);
+      })
+      
+  }, [id]);
+
+  return (
+    <>
+      {/* Display the todo properties */}
+      <div>
+        <h1>Title: {todo?.title}</h1>
+        <p>ID: {todo?.id}</p>
+        <p>Completed: {todo?.completed ? 'Yes' : 'No'}</p>
+      </div>
+    </>
+  );
+}
+
+
+export default App
